@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use lib '../lib','lib';
 
-use Config::IniHashReadDeep;
+use Config::IniHashReadDeep 'get_ini_file';
 # use Data::Dumper;
 
 use Test::More tests => 7;
@@ -12,10 +12,10 @@ use Test::More tests => 7;
 
 my $file;
 
-$file = 'config/bar.ini';
+$file = 'config/foo.ini';
 
 if (!-e $file){
-  $file = 't/config/bar.ini';
+  $file = 't/config/foo.ini';
 }
 
 if (!-e $file){
@@ -23,9 +23,10 @@ if (!-e $file){
 }
 
 
-my $ini = Config::IniHashReadDeep->new( $file , delimiter => '_')->get_ini();
+my $ini = get_ini_file( $file );
 
-#  print Dumper($ini);
+
+
 
 is( $ini->{'digitsmore'}->{'with'}->{'counting'}->[001]->{'foo'}, '111f' , 'value in array' );
 is( $ini->{'digits'}->{'with'}->{'counting'}->[000], '111' , 'value in array' );

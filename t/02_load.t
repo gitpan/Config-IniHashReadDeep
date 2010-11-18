@@ -5,7 +5,7 @@ use warnings;
 use lib '../lib','lib';
 
 use Config::IniHashReadDeep;
-use Data::Dumper;
+# use Data::Dumper;
 
 use Test::More tests => 7;
 
@@ -23,9 +23,9 @@ if (!-e $file){
 }
 
 
-my $ini = Config::IniHashReadDeep->new( $file );
+my $ini = Config::IniHashReadDeep->new( $file )->get_ini();
 
- print Dumper($ini);
+#  print Dumper($ini);
 
 is( $ini->{'digitsmore'}->{'with'}->{'counting'}->[001]->{'foo'}, '111f' , 'value in array' );
 is( $ini->{'digits'}->{'with'}->{'counting'}->[000], '111' , 'value in array' );
